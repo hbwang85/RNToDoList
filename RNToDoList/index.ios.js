@@ -8,46 +8,47 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View
-} from 'react-native';
+  View,
+  SegmentedControlIOS,
+} from 'react-native'
 
-class Project extends Component {
+var segmentedControl = require('./js/segmentControl').default;
+
+class rootComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <SegmentedControlIOS 
+          values={['TODO', 'FINISHED']}
+          momentary={false}
+          tintColor={'"rgb(74,144,226)"'}
+          style={styles.segment}
+          selectedIndex={(this.state && this.state.scIndex) || 0}
+          onValueChange={(value) => {}}
+          onChange={(event) => {
+            this.setState({
+              scIndex: event.nativeEvent.selectedSegmentIndex
+            })
+          }}
+        />
+        
       </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  segment: {
+    width: 300,
+    marginTop: 20,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  
 });
 
-AppRegistry.registerComponent('Project', () => Project);
+AppRegistry.registerComponent('Project', () => rootComponent);

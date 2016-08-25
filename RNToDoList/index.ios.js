@@ -9,6 +9,7 @@ import {
   AppRegistry,
   StyleSheet,
   NavigatorIOS,
+  AlertIOS,
 } from 'react-native'
 
 var Container = require('./js/Container').default;
@@ -27,7 +28,16 @@ class RootComponent extends Component {
           title: 'ToDo',
           component: Container,
           rightButtonTitle: 'Add',
+          onRightButtonPress: () => this._showAlert(),
         }}/>
+    )
+  }
+  
+  _showAlert() {
+    AlertIOS.prompt(
+      'Add a new task',
+      'Enter a new task below',
+      null
     )
   }
   

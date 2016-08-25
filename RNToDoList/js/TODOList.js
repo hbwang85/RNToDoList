@@ -1,4 +1,4 @@
-import React, { Component, } from 'react'
+import React, { Component, PropTypes,} from 'react'
 import {
   View,
   ListView,
@@ -7,9 +7,14 @@ import {
   StyleSheet,
 } from 'react-native'
 
+var ToDoCell = require('./ToDoCell').default;
+
 class TodoList extends Component {
 
-  static propTypes = {}
+  static propTypes = {
+    isFinished: PropTypes.bool.isRequired,
+    inputData: PropTypes.array.isRequired,
+  }
 
   static defaultProps = {}
 
@@ -19,42 +24,16 @@ class TodoList extends Component {
       {rowHasChanged: (r1, r2) => r1 !== r2});
     
     this.state = {
-      dataSource: ds.cloneWithRows(['1', '2', '3']),
+      dataSource: ds.cloneWithRows(this.props.inputData),
     }
   }
   
    renderRow(rowData, sectionID, rowID) {
     return (
-      <TouchableHighlight
-        activeOpacity={75 / 100}
-        underlayColor={"rgb(210,210,210)"}>
-          <View
-            style={{
-            flex: 1,
-            height: 60,
-            backgroundColor: 'white',
-            justifyContent: 'center',
-          }}>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                backgroundColor: "rgba(116,169,233,1)",
-                height: 58,
-              }}>
-              <Text
-              style={{
-                color: 'white',
-                fontSize:  18,
-                fontWeight: '300',
-                fontFamily: "Helvetica Neue",
-                marginLeft: 20,
-              }}>
-              My Text
-            </Text>
-            </View>
-        </View>
-      </TouchableHighlight>
+      <ToDoCell
+        content= {rowData}
+        isFinished= {this.props.isFinished}
+        />
     )
   }
 
@@ -68,7 +47,5 @@ class TodoList extends Component {
     )
   }
 }
-
-
 
 export default TodoList        

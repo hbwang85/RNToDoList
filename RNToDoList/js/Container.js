@@ -24,14 +24,13 @@ class Container extends Component {
 
   render() {
     var Container = this.state.scIndex === 0 ? 
-        <TODOList /> : 
-       <Image   
-         style={{  
-           width: 300,
-           height:  200, 
-         }}
-         resizeMode={"contain"}
-         source={{uri:'https://unsplash.it/600/400/?random'}}
+        <TODOList 
+          isFinished={false}
+          inputData={['1', '2']}
+          /> : 
+       <TODOList
+         isFinished={true}
+         inputData={['1', '2', '3']}
        />
       return (
       <View style={styles.container}>

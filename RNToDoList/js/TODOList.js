@@ -23,10 +23,15 @@ class TodoList extends Component {
     var ds = new ListView.DataSource(
       {rowHasChanged: (r1, r2) => r1 !== r2});
     
-    this.state = {
-      dataSource: ds.cloneWithRows(this.props.inputData),
-    }
+    this.state = {}
   }
+  
+//   componentWillReceiveProps(props){
+//     alert('componentWillUpdate'+props.inputData)
+//     this.setState({
+//       dataSource: this.state.dataSource.cloneWithRows(props.inputData)
+//     });
+//  }
   
    renderRow(rowData, sectionID, rowID) {
     return (
@@ -38,11 +43,13 @@ class TodoList extends Component {
   }
 
   render() {
+    var ds = new ListView.DataSource(
+      {rowHasChanged: (r1, r2) => r1 !== r2});
     return (
       <ListView
         automaticallyAdjustContentInsets={false}
         enableEmptySections={true} //MUST
-        dataSource={this.state.dataSource}
+        dataSource={ds.cloneWithRows(this.props.inputData)}
         renderRow={this.renderRow.bind(this)}/>
     )
   }

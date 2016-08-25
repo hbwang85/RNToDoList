@@ -23,16 +23,9 @@ class Container extends Component {
   }
 
   render() {
-    var Container = this.state.scIndex === 0 ? 
-        <TODOList 
-          isFinished={false}
-          inputData={['1', '2']}
-          /> : 
-       <TODOList
-         isFinished={true}
-         inputData={['1', '2', '3']}
-       />
-      return (
+    let isFinished = this.state.scIndex != 0;
+    let inputData = isFinished ? ['f1', 'f2'] : ['1', '2', '3'];
+    return (
       <View style={styles.container}>
         <View
           style={{  
@@ -41,7 +34,7 @@ class Container extends Component {
             height: 50,
             marginTop: 64,
           }}>
-
+  
           <SegmentedControlIOS 
             values={['TODO', 'FINISHED']}
             momentary={false}
@@ -56,7 +49,10 @@ class Container extends Component {
             }}
           />
         </View>
-         {Container}
+         <TODOList
+            isFinished={isFinished}
+            inputData={inputData}
+          />
       </View>
 
     );

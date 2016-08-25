@@ -4,6 +4,7 @@ import {
   ListView,
   Text,
   TouchableHighlight,
+  StyleSheet,
 } from 'react-native'
 
 class TodoList extends Component {
@@ -20,7 +21,6 @@ class TodoList extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(['1', '2', '3']),
     }
-    
   }
   
    renderRow(rowData, sectionID, rowID) {
@@ -61,11 +61,14 @@ class TodoList extends Component {
   render() {
     return (
       <ListView
+        automaticallyAdjustContentInsets={false}
         enableEmptySections={true} //MUST
         dataSource={this.state.dataSource}
         renderRow={this.renderRow.bind(this)}/>
     )
   }
 }
+
+
 
 export default TodoList        

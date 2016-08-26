@@ -13,7 +13,7 @@ class TodoList extends Component {
 
   static propTypes = {
     isFinished: PropTypes.bool.isRequired,
-    inputData: PropTypes.array.isRequired,
+    inputData: PropTypes.string.isRequired,
   }
 
   static defaultProps = {}

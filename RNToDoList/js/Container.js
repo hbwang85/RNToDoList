@@ -1,4 +1,4 @@
-import React, { Component, } from 'react'
+import React, { Component, PropTypes} from 'react'
 import { View, 
        StyleSheet,
        TouchableHighlight,
@@ -11,7 +11,9 @@ var TODOList = require('./TODOList').default;
 
 class Container extends Component {
 
-  static propTypes = {}
+  static propTypes = {
+    inputData: PropTypes.string.isRequired,
+  }
 
   static defaultProps = {}
 

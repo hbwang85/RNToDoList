@@ -17,10 +17,15 @@ var Container = require('./js/Container').default;
 class RootComponent extends Component {
   constructor(prop) {
     super(prop)
-    this.state = {}
+    this.state = {
+      inputTask: '',
+    }
   }
   
   render() {
+    let data = this.state.inputTask;
+          alert('rerender:'+data);
+
     return(
       <NavigatorIOS
         style={{flex: 1}}
@@ -28,6 +33,7 @@ class RootComponent extends Component {
           title: 'ToDo',
           component: Container,
           rightButtonTitle: 'Add',
+          passProps:{inputData: data},
           onRightButtonPress: () => this._showAlert(),
         }}/>
     )
@@ -37,15 +43,18 @@ class RootComponent extends Component {
     AlertIOS.prompt(
       'Add a new task',
       'Enter a new task below',
-      null
+      this._addTask,
     )
+  }
+  
+  _addTask = (promptValue) => {
+//     alert("this is the task "+ JSON.stringify(promptValue));
+    this.setState({
+      inputTask: JSON.stringify(promptValue),
+    })
   }
   
 }
 
-const styles = StyleSheet.create({
-  
-  
-});
 
 AppRegistry.registerComponent('Project', () => RootComponent);
